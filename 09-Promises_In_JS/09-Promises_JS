@@ -1,0 +1,251 @@
+// Promise
+
+function getRandomInt(n) {
+    return Math.floor(Math.random()*n);
+}
+
+/*
+function createPromiseWithLoop() {
+    return (new Promise(function exec(resolve, reject) {
+        for(let i = 0; i < 1000000000; i++) {};
+        let a = getRandomInt(10);
+        return a%2 == 0 ? resolve(a) : reject(a);
+    }));
+}
+
+function createPromiseWithTimeout() {
+    return (new Promise(function exec(resolve, reject) {
+        setTimeout(function() {
+            let a = getRandomInt(10);
+            return a%2 == 0 ? resolve(a) : reject(a);
+        }, 1000);
+    }));
+}
+
+let x = createPromiseWithLoop();
+let y = createPromiseWithTimeout();
+console.log(x);
+for(let i = 0; i < 50000000000; i++) {
+
+}
+console.log(y);
+*/
+
+
+/*
+function promiseWithSetTimeout() {
+    return (
+        new Promise(function exec(resolve, reject) {
+            console.log("Entering Promise");
+            let x = getRandomInt(10);
+            setTimeout(function() {
+                if(x%2 == 0) {
+                    resolve(x);
+                } else {
+                    reject(x);
+                }
+            }, 5000);
+            console.log("Exciting Promise");
+        })
+    );
+}
+
+let y = promiseWithSetTimeout();
+console.log("Waiting for Promise to be completed");
+console.log("Current state of Promise obj is: ", y);
+
+y.then(
+    function resolveHandler(num) {
+        console.log("Promise resolved for value "+num);
+    },
+    function rejectionHandler(num) {
+        console.log("Promise rejected for value ", num);
+    }
+);
+
+console.log("hehe", y);
+
+*/
+
+/*
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+  
+  function createPromisewithTimeout() {
+    return new Promise(function executor(resolve, reject) {
+      console.log("Entering the executor callback in the promise constructor");
+      setTimeout(function () {
+        let num = getRandomInt(10);
+        if (num % 2 == 0) {
+          resolve(num);
+        } else {
+          reject(num);
+        }
+      }, 10000);
+      console.log("Existing the executor callback in the promise constructor");
+    });
+  }
+  
+  console.log("Starting....");
+  const p = createPromisewithTimeout();
+  console.log("We are now waiting for the promise to complete");
+  console.log("Currently my promise object is like ...", p);
+  console.log("Going to register my 1st set of handlers");
+  
+  p.then(
+    function fulfillHandler1(value) {
+      console.log("Inside the fulfill handler 1 with value", value);
+      console.log("Promise after the fullfillment is", p);
+    },
+    function rejectionHandler1(value) {
+      console.log("Inside the rejection handler 1 with value", value);
+      console.log("Promise after the rejection is", p);
+    }
+  );
+  
+  console.log("Going to register my 2nd set of handlers");
+  p.then(
+    function fulfillHandler2(value) {
+      console.log("Inside the fulfill handler 2 with value", value);
+      console.log("Promise after the fullfillment is", p);
+    },
+    function rejectionHandler2(value) {
+      console.log("Inside the rejection handler 2 with value", value);
+      console.log("Promise after the rejection is", p);
+    }
+  );
+  
+  console.log("Ending");
+  
+  for (let i = 0; i < 100000000; i++) {}
+  console.log("Ending the loop also");
+  */
+
+
+/*
+function createPromise(url) {
+  return (new Promise( function(resolve, reject) {
+      console.log("Started downloading from", url);
+      setTimeout(function ProcessDownloading() {
+          let data = "error 404";
+          resolve(data);
+          console.log("download completed");
+      }, 5000);
+  }));
+}
+
+console.log("Start");
+let p = createPromise("google.com");
+p.then(
+    function fulfill(value) {
+        console.log("Value is", value);
+    },
+    function reject(value) {}
+);
+console.log("End");
+*/
+
+/*
+console.log("Start of the file");
+
+setTimeout(function timer1() {
+  console.log("Timer 1 done");
+}, 0);
+
+for (let i = 0; i < 1000000000; i++) {
+  // something
+}
+
+let x = Promise.resolve("Rizon Promise");
+x.then(function processPromise(value) {
+  console.log("Whose promise ? ", value);
+  setTimeout(function timer2() {
+    console.log("Timer 2 done ");
+  }, 0);
+});
+
+setTimeout(function timer3() {
+  console.log("Timer 3 done ");
+}, 0);
+
+console.log("End of the file");
+*/
+
+
+
+/*
+
+// How Promise Resolve issues of Callbacks
+
+function download(url, cb) {
+    console.log("Downloading content from url",url);
+    setTimeout(function exec() {
+        console.log("Completed downloading data in 5s");
+        const data = "E-Lafda Detected";
+        cb(data);
+        cb(data);
+    }, 5000);
+}
+
+download("www.xyz.com", function cb(value) {
+    console.log("Downloaded data is", value);
+})
+
+// Output:
+// Downloading content from url www.xyz.com
+// Completed downloading data in 5s
+// Downloaded data is E-Lafda Detected
+// Downloaded data is E-Lafda Detected
+
+// Now we will do the same using Promise
+
+function download(url) {
+    console.log("Downloading content from url",url);
+    return (new Promise(function(resolve, reject) {
+        setTimeout(function exec() {
+            console.log("Completed downloading data in 5s");
+            const data = "E-Lafda Detected";
+            resolve(data);
+            resolve(data);
+        }, 5000);
+    }));
+}
+
+download("www.xyz.com").then(function fulfill(value) {
+    console.log("Downloaded data is", value);
+})
+
+// Output:
+// Downloading content from url www.xyz.com
+// Completed downloading data in 5s
+// Downloaded data is E-Lafda Detected
+
+*/
+
+
+// Dot then(.then) chaining
+function download(url) {
+    console.log("Downloading content from url",url);
+    return (new Promise(function(resolve, reject) {
+        setTimeout(function exec() {
+            console.log("Completed downloading data in 5s");
+            const data = "ABCDEF";
+            resolve(data);
+        }, 5000);
+    }));
+}
+
+download("www.xyz.com").then(
+    function fulfill(value) {
+        console.log("Downloaded data is", value);
+        return "New Chained Promise String";
+    },
+    function reject(value) {
+        console.log("Rejected with", value);
+    }
+).then(
+    function fulfill(value) {
+        console.log("Value from chained then promise is", value);
+    }
+)
